@@ -1,0 +1,25 @@
+---
+
+- hosts: orkjern_local orkjern_remote
+  vars_files:
+    - vars/main.yml
+  roles:
+    - kamaln7.swapfile
+    - geerlingguy.composer
+    - geerlingguy.mysql
+    - geerlingguy.redis
+    - geerlingguy.nginx
+    - geerlingguy.php
+    - geerlingguy.varnish
+
+  tasks:
+    - include: tasks/nginxconfig.yml
+    - name: Copy Varnish config
+      template:
+        src: templates/default.vcl.j2
+        dest: /etc/varnish/default.vcl
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart varnish

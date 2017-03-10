@@ -1,0 +1,29 @@
+---
+
+- name: Copy Drupal snippets
+  copy:
+    src: ../assets/drupal.conf
+    dest: /etc/nginx/snippets/drupal.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create a VirtualHost file for each enabled VirtualHost
+  template:
+    src=templates/vhost.conf.j2
+    dest=/etc/nginx/sites-available/{{ item.name }}.conf
+    owner=root
+    group=root
+    mode=0644
+  with_items: "{{ nginx_vhosts_enabled }}"
+
+- name: Enable the virtual hosts
+  file:
+    src=/etc/nginx/sites-available/{{ item.name }}.conf
+    dest=/etc/nginx/sites-enabled/{{ item.name }}.conf
+    owner=root
+    group=root
+    state=link
+  with_items: "{{ nginx_vhosts_enabled }}"
+  notify:
+    - restart nginx

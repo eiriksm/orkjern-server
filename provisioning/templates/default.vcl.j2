@@ -1,0 +1,30 @@
+vcl 4.0;
+
+# This is a basic VCL configuration file for varnish.  See the vcl(7)
+# man page for details on VCL syntax and semantics.
+#
+# Default backend definition.  Set this to point to your content
+# server.
+backend default {
+  .host = "{{ varnish_default_backend_host }}";
+  .port = "{{ varnish_default_backend_port }}";
+}
+
+sub vcl_recv {
+  unset req.http.proxy;
+  if (req.http.cf-connecting-ip) {
+    unset req.http.X-Forwarded-For;
+    set req.http.X-Forwarded-For = req.http.cf-connecting-ip;
+  }
+  if (req.http.X-Forwarded-Proto == "http") {
+    return (synth(750, ""));
+  }
+}
+
+sub vcl_synth {
+  if (resp.status == 750) {
+    set resp.status = 301;
+    set resp.http.Location = "https://" + req.http.host + req.url;
+    return(deliver);
+  }
+}
