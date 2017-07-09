@@ -5,11 +5,12 @@
     - vars/main.yml
   roles:
     - kamaln7.swapfile
-    - geerlingguy.composer
+    - geerlingguy.git
     - geerlingguy.mysql
     - geerlingguy.redis
     - geerlingguy.nginx
     - geerlingguy.php
+    - geerlingguy.composer
     - geerlingguy.varnish
 
   tasks:
