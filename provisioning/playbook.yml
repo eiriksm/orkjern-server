@@ -24,3 +24,28 @@
         mode: 0644
       notify:
         - restart varnish
+    - name: Add path to cron
+      cron:
+        name: PATH
+        env: yes
+        value: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/.composer/vendor/bin"
+    - name: Add some Drupal crons
+      cron:
+        name: "{{ item.1.name }} cron"
+        minute: "{{ item.0 + 1 }}"
+        hour: "*"
+        job: "drush --root=/var/www/{{ item.1.name }}/drupal --uri=http://{{item.1.name}} cron --quiet >> /var/log/drupal.cron.log 2>&1"
+      with_indexed_items:
+        - "{{ nginx_vhosts_enabled }}"
+    - name: Add letsencrypt cron job
+      cron:
+        name: "letsencrypt renew cron"
+        minute: 20
+        hour: 2
+        job: /usr/bin/letsencrypt renew > /var/log/letsencrypt.log
+    - name: "Reload nginx on cron"
+      cron:
+        name: "Reload nginx cron"
+        minute: 25
+        hour: 2
+        job: service nginx reload
