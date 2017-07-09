@@ -16,6 +16,7 @@ php_packages:
   - php7.0-zip
   - php7.0-mysql
   - php7.0-curl
+  - php7.0-bcmath
 nginx_upstreams:
   - name: phpfpm
     servers: {
@@ -23,11 +24,33 @@ nginx_upstreams:
     }
 nginx_remove_default_vhost: true
 nginx_vhosts_enabled:
+  - name: "api.orkjern.com"
+    cloudflare: false
+    letsencrypt: false
   - name: "orkjern.com"
     cloudflare: true
+    letsencrypt: false
   - name: "countrr.com"
     cloudflare: true
+    letsencrypt: false
   - name: "drupalnorge-social.e-o.no"
+    cloudflare: false
+    letsencrypt: false
+  - name: "oslo2015.drupalcamp.no"
+    cloudflare: false
+    letsencrypt: true
+  - name: "oslo2016.drupalcamp.no"
+    cloudflare: false
+    letsencrypt: true
+  - name: "oslo2017.drupalcamp.no"
+    cloudflare: false
+    letsencrypt: true
+  - name: "crashndash.com"
+    cloudflare: true
+    letsencrypt: false
+  - name: "violinist.io"
+    cloudflare: true
+    letsencrypt: false
 varnish_default_backend_port: 8008
 varnish_use_default_vcl: false
 swapfile_size: 2GB

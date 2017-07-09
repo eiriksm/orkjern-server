@@ -10,4 +10,29 @@ server {
   access_log /var/log/nginx/{{item.name}}_access.log;
   error_log /var/log/nginx/{{item.name}}_error.log;
   root /var/www/{{item.name}}/drupal;
+{% if item.letsencrypt %}
+  location '/.well-known/acme-challenge' {
+    default_type "text/plain";
+    root /var/www/{{item.name}}/drupal;
+  }
+
+  if ( $http_x_forwarded_proto != 'https' ) {
+    return 301 https://{{item.name}}$request_uri;
+  }
+{% endif %}
 }
+
+{% if item.letsencrypt %}
+server {
+  listen 443;
+  server_name .{{item.name}};
+  include proxy_params;
+  ssl                  on;
+  ssl_certificate      /etc/letsencrypt/live/{{item.name}}/fullchain.pem;
+  ssl_certificate_key  /etc/letsencrypt/live/{{item.name}}/privkey.pem;
+  ssl_session_timeout  1m;
+  location / {
+    proxy_pass http://localhost:80;
+  }
+}
+{% endif %}
