@@ -43,6 +43,12 @@
         minute: 20
         hour: 2
         job: /usr/bin/letsencrypt renew > /var/log/letsencrypt.log
+    - name: Make memory limit unlimited on cli
+      lineinfile:
+        dest: /etc/php/7.0/cli/php.ini
+        state: present
+        regexp: memory_limit
+        line: memory_limit = -1
     - name: "Reload nginx on cron"
       cron:
         name: "Reload nginx cron"
