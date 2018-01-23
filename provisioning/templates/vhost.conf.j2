@@ -27,6 +27,8 @@ server {
   listen 443;
   server_name .{{item.name}};
   include proxy_params;
+  access_log /var/log/nginx/{{item.name}}_access.log;
+  error_log /var/log/nginx/{{item.name}}_error.log;
   ssl                  on;
   ssl_certificate      /etc/letsencrypt/live/{{item.name}}/fullchain.pem;
   ssl_certificate_key  /etc/letsencrypt/live/{{item.name}}/privkey.pem;
