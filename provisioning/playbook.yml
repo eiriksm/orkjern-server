@@ -12,6 +12,7 @@
     - geerlingguy.php
     - geerlingguy.composer
     - geerlingguy.varnish
+    - nickhammond.logrotate
 
   tasks:
     - include: tasks/nginxconfig.yml
