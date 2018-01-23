@@ -15,6 +15,10 @@
 
   tasks:
     - include: tasks/nginxconfig.yml
+    - name: Intall moreutils
+      package:
+        name: moreutils
+        state: present
     - name: Copy Varnish config
       template:
         src: templates/default.vcl.j2
