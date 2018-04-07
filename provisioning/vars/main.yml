@@ -46,6 +46,9 @@ nginx_vhosts_enabled:
   - name: "oslo2017.drupalcamp.no"
     cloudflare: false
     letsencrypt: true
+  - name: "oslo2018.drupalcamp.no"
+    cloudflare: false
+    letsencrypt: true
   - name: "crashndash.com"
     cloudflare: true
     letsencrypt: false
