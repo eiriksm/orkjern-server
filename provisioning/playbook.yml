@@ -9,6 +9,7 @@
     - geerlingguy.mysql
     - geerlingguy.redis
     - geerlingguy.nginx
+    - geerlingguy.php-versions
     - geerlingguy.php
     - geerlingguy.composer
     - geerlingguy.varnish

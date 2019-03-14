@@ -3,6 +3,7 @@
 - src: geerlingguy.mysql
 - src: geerlingguy.redis
 - src: geerlingguy.nginx
+- src: geerlingguy.php-versions
 - src: geerlingguy.php
 - src: geerlingguy.composer
 - src: geerlingguy.varnish
