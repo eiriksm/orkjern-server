@@ -51,7 +51,7 @@
         job: /usr/bin/letsencrypt renew > /var/log/letsencrypt.log
     - name: Make memory limit unlimited on cli
       lineinfile:
-        dest: /etc/php/7.0/cli/php.ini
+        dest: /etc/php/{{ php_default_version_debian }}/cli/php.ini
         state: present
         regexp: memory_limit
         line: memory_limit = -1
