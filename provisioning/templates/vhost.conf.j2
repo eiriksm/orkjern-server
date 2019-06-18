@@ -5,11 +5,15 @@ server {
 {% endif %}
   listen 8008;
   server_name www.{{item.name}} {{item.name}};
+{% if item.static %}
+  root /var/www/{{item.name}}/static/{{ item.name }};
+{% else %}
   set $php_upstream phpfpm;
   include snippets/drupal.conf;
   access_log /var/log/nginx/{{item.name}}_access.log;
   error_log /var/log/nginx/{{item.name}}_error.log;
   root /var/www/{{item.name}}/drupal;
+{% endif %}
 {% if item.letsencrypt %}
   location '/.well-known/acme-challenge' {
     default_type "text/plain";
