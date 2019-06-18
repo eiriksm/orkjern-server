@@ -32,33 +32,39 @@ nginx_vhosts_enabled:
   - name: "api.orkjern.com"
     cloudflare: false
     letsencrypt: false
+    static: false
   - name: "orkjern.com"
     cloudflare: true
     letsencrypt: false
-  - name: "countrr.com"
-    cloudflare: true
-    letsencrypt: false
+    static: false
   - name: "drupalnorge-social.e-o.no"
     cloudflare: false
     letsencrypt: false
+    static: false
   - name: "oslo2015.drupalcamp.no"
     cloudflare: false
     letsencrypt: true
+    static: true
   - name: "oslo2016.drupalcamp.no"
     cloudflare: false
     letsencrypt: true
+    static: false
   - name: "oslo2017.drupalcamp.no"
     cloudflare: false
     letsencrypt: true
+    static: false
   - name: "oslo2018.drupalcamp.no"
     cloudflare: false
     letsencrypt: true
+    static: false
   - name: "crashndash.com"
     cloudflare: true
     letsencrypt: false
+    static: false
   - name: "violinist.io"
     cloudflare: true
     letsencrypt: false
+    static: false
 varnish_default_backend_port: 8008
 varnish_use_default_vcl: false
 swapfile_size: 2GB
