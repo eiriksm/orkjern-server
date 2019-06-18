@@ -40,7 +40,7 @@
         name: "{{ item.1.name }} cron"
         minute: "{{ item.0 + 1 }}"
         hour: "*"
-        job: "drush --root=/var/www/{{ item.1.name }}/drupal --uri=http://{{item.1.name}} cron --quiet 2>&1 | ts '[\\%Y-\\%m-\\%d \\%H:\\%M:\\%S] [{{item.1.name}}]' >> /var/log/drupal.cron.log"
+        job: "drush --root=/var/www/{{ item.1.name }}/drupal --uri=https://{{item.1.name}} cron --quiet 2>&1 | ts '[\\%Y-\\%m-\\%d \\%H:\\%M:\\%S] [{{item.1.name}}]' >> /var/log/drupal.cron.log"
       with_indexed_items:
         - "{{ nginx_vhosts_enabled }}"
     - name: Add letsencrypt cron job
