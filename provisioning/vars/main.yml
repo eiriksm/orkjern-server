@@ -1,13 +1,13 @@
 redis_maxmemory: 300mb
 redis_maxmemory_policy: "allkeys-lru"
-php_version: '7.1'
+php_version: '7.3'
 php_memory_limit: "256M"
 php_max_execution_time: "90"
 php_upload_max_filesize: "8M"
 php_enable_webserver: true
 php_webserver_daemon: "nginx"
 php_enable_php_fpm: true
-php_default_version_debian: "7.1"
+php_default_version_debian: "7.3"
 php_packages:
   - php{{ php_default_version_debian }}-cli
   - php{{ php_default_version_debian }}-common
@@ -28,43 +28,6 @@ nginx_upstreams:
       "127.0.0.1:9000"
     }
 nginx_remove_default_vhost: true
-nginx_vhosts_enabled:
-  - name: "api.orkjern.com"
-    cloudflare: false
-    letsencrypt: false
-    static: false
-  - name: "orkjern.com"
-    cloudflare: true
-    letsencrypt: false
-    static: false
-  - name: "drupalnorge-social.e-o.no"
-    cloudflare: false
-    letsencrypt: false
-    static: false
-  - name: "oslo2015.drupalcamp.no"
-    cloudflare: false
-    letsencrypt: true
-    static: true
-  - name: "oslo2016.drupalcamp.no"
-    cloudflare: false
-    letsencrypt: true
-    static: false
-  - name: "oslo2017.drupalcamp.no"
-    cloudflare: false
-    letsencrypt: true
-    static: false
-  - name: "oslo2018.drupalcamp.no"
-    cloudflare: false
-    letsencrypt: true
-    static: false
-  - name: "crashndash.com"
-    cloudflare: true
-    letsencrypt: false
-    static: false
-  - name: "violinist.io"
-    cloudflare: true
-    letsencrypt: false
-    static: false
 varnish_default_backend_port: 8008
 varnish_use_default_vcl: false
 swapfile_size: 2GB
