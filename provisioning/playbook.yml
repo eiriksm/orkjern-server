@@ -25,6 +25,8 @@
     - name: Intall some packages that does not seem to get automatically installed
       package:
         name:
+          - s3cmd
+          - unzip
           - php{{php_version}}-mysql
           - php{{php_version}}-redis
         state: present
