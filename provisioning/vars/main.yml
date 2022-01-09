@@ -1,13 +1,13 @@
 redis_maxmemory: 300mb
 redis_maxmemory_policy: "allkeys-lru"
-php_version: '7.3'
+php_version: '7.4'
 php_memory_limit: "256M"
 php_max_execution_time: "90"
 php_upload_max_filesize: "8M"
 php_enable_webserver: true
 php_webserver_daemon: "nginx"
 php_enable_php_fpm: true
-php_default_version_debian: "7.3"
+php_default_version_debian: {{php_version}}
 php_packages:
   - php{{ php_default_version_debian }}-cli
   - php{{ php_default_version_debian }}-common
@@ -22,6 +22,7 @@ php_packages:
   - php{{ php_default_version_debian }}-bcmath
   - php{{ php_default_version_debian }}-redis
   - php{{ php_default_version_debian }}-mysql
+  - php{{ php_default_version_debian }}-fpm
 nginx_upstreams:
   - name: phpfpm
     servers: {
