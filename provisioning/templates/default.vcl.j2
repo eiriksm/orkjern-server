@@ -60,6 +60,7 @@ sub vcl_recv {
     req.url ~ "^/admin/.*$" ||
     req.url ~ "^/flag/.*$" ||
     req.url ~ "^.*/ajax/.*$" ||
+    req.url ~ "^/api/.*$" ||
     req.url ~ "^.*/ahah/.*$") {
       return (pass);
   }

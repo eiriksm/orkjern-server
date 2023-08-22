@@ -62,3 +62,21 @@
         minute: 25
         hour: 2
         job: service nginx reload
+    - name: Check if php7.4-fpm Exists
+      stat: path=/etc/init.d/php7.4-fpm
+      register: service_status_74
+    - name: Stop service php7.4-fpm, if started
+      when: service_status_74.stat.exists
+      notify: restart nginx
+      service:
+        name: php7.4-fpm
+        state: stopped
+    - name: Check if php8.0-fpm Exists
+      stat: path=/etc/init.d/php8.0-fpm
+      register: service_status_80
+    - name: Stop service php8.0-fpm, if started
+      when: service_status_80.stat.exists
+      notify: restart nginx
+      service:
+        name: php8.0-fpm
+        state: stopped
