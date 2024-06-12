@@ -40,6 +40,18 @@ nginx_log_format: |
   '$status $body_bytes_sent "$http_referer" '
   '"$http_user_agent" "$http_x_forwarded_for"'
 logrotate_scripts:
+  - name: drupallogs
+    paths:
+      - "/var/www/*/logs/*.log"
+    options:
+      - su www-data www-data
+      - daily
+      - size 50M
+      - rotate 5
+      - missingok
+      - compress
+      - delaycompress
+      - create 0664 www-data www-data
   - name: drupalcron
     path: "/var/log/drupal.cron.log"
     options:

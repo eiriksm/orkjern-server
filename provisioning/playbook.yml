@@ -57,6 +57,12 @@
         state: present
         regexp: memory_limit
         line: memory_limit = -1
+    - name: Append the www-data group to the deploy user
+      ansible.builtin.user:
+        name: "{{ deploy_user }}"
+        append: true
+        create_home: false
+        groups: www-data
     - name: "Reload nginx on cron"
       cron:
         name: "Reload nginx cron"
