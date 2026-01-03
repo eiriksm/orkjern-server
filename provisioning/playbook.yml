@@ -95,3 +95,12 @@
       service:
         name: php8.1-fpm
         state: stopped
+    - name: Check if php8.2-fpm Exists
+      stat: path=/etc/init.d/php8.2-fpm
+      register: service_status_82
+    - name: Stop service php8.2-fpm, if started
+      when: service_status_82.stat.exists
+      notify: restart nginx
+      service:
+        name: php8.2-fpm
+        state: stopped
