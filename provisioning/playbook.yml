@@ -14,7 +14,6 @@
     - geerlingguy.php
     - geerlingguy.composer
     - geerlingguy.varnish
-    - geerlingguy.drush
     - nickhammond.logrotate
 
   tasks:
