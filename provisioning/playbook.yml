@@ -17,7 +17,7 @@
     - nickhammond.logrotate
 
   tasks:
-    - include: tasks/nginxconfig.yml
+    - include_tasks: tasks/nginxconfig.yml
     - name: Intall moreutils
       package:
         name: moreutils
