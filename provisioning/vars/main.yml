@@ -28,6 +28,7 @@ php_packages:
   - php{{ php_default_version_debian }}-mysql
   - php{{ php_default_version_debian }}-fpm
   - php{{ php_default_version_debian }}-gmp
+  - php{{ php_default_version_debian }}-intl
 nginx_upstreams:
   - name: phpfpm
     servers: {
