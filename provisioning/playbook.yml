@@ -43,7 +43,16 @@
       cron:
         name: PATH
         env: yes
-        value: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/root/.composer/vendor/bin"
+        value: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:vendor/bin"
+    - name: Remove global drush launcher
+      file:
+        path: /usr/local/bin/drush
+        state: absent
+    - name: Add vendor/bin to PATH for interactive sessions
+      copy:
+        dest: /etc/profile.d/vendor-bin.sh
+        content: 'export PATH="$PATH:vendor/bin"'
+        mode: '0644'
     - name: Add letsencrypt cron job
       cron:
         name: "letsencrypt renew cron"
