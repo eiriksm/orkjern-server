@@ -1,9 +1,10 @@
 redis_maxmemory: 300mb
 redis_maxmemory_policy: "allkeys-lru"
 php_version: '8.3'
-php_memory_limit: "256M"
+php_memory_limit: "512M"
 php_max_execution_time: "90"
-php_upload_max_filesize: "8M"
+php_upload_max_filesize: "128M"
+php_post_max_size: "128M"
 php_date_timezone: Europe/Berlin
 php_enable_webserver: true
 php_webserver_daemon: "nginx"
@@ -35,6 +36,7 @@ nginx_upstreams:
       "127.0.0.1:9000"
     }
 nginx_remove_default_vhost: true
+nginx_client_max_body_size: "128m"
 varnish_default_backend_port: 8008
 varnish_use_default_vcl: false
 varnish_version: "7.7"
